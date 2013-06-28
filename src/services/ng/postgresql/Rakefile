@@ -33,6 +33,15 @@ namespace "bundler" do
   end
 end
 
+namespace "vagrant" do
+  desc "Setup /var/vcap paths"
+  task :vcap_paths do
+    sh "sudo mkdir /var/vcap"
+    sh "sudo chmod 775 /var/vcap"
+    sh "sudo chgrp admin -R /var/vcap"
+  end
+end
+
 namespace "test" do
   def run_spec
     sh "nats-server &"

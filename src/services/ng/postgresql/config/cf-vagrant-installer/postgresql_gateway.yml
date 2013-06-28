@@ -1,0 +1,71 @@
+---
+cloud_controller_uri: http://127.0.0.1:8181
+
+mbus: nats://localhost:4222
+service:
+  unique_id: postgresql92
+  name: postgresql
+  version: "9.2"
+  description: 'PostgreSQL database'
+  info_url: www.postgresql.org
+  blurb: "Postgres, delicious postgresql."
+  provider_name: "Postgresql 9.2"
+  plans:
+    free:
+      name: Free
+      # guid: free-guid
+      description: Free Postgresql
+      free: true
+      unique_id: postgresql92-free
+  default_plan: free
+  tags: ['relational']
+  supported_versions:
+    - "9.2"
+  version_aliases:
+    current: free
+
+ip_route: localhost
+
+cc_api_version: v2
+
+gateway_name: "PostgreSQL (Core) Gateway"
+uaa_client_id: cf
+uaa_endpoint: http://127.0.0.1:8080/uaa
+uaa_client_auth_credentials:
+  username: admin
+  password: password
+service_auth_tokens:
+  postgresql_core: "0xdeadbeef"
+
+index: 0
+
+token: "0xdeadbeef"
+
+logging:
+  level: debug
+pid: /var/vcap/sys/run/postgresql_service.pid
+node_timeout: 2
+api_extensions:
+  - snapshots
+  - serialization
+  - jobs
+resque:
+  host: localhost
+  port: 6379
+download_url_template: http://dl.vcap.me/serialized/%{service}/%{name}/snapshots/%{snapshot_id}?token=%{token}
+
+plan_management:
+  plans:
+    free:
+      low_water: 10
+      high_water: 180
+      lifecycle:
+        snapshots:
+          quota: 5
+        serialization: enable
+        job: enable
+      #allow_over_provisioning: false
+
+# z_interval: 30
+# check_orphan_interval: 3600
+# double_check_orphan_interval: 300
