@@ -1,3 +1,2 @@
-nats: nats-server
 gateway: env CLOUD_FOUNDRY_CONFIG_PATH=config/cf-vagrant-installer bundle exec bin/postgresql_gateway
 node: env CLOUD_FOUNDRY_CONFIG_PATH=config/cf-vagrant-installer bundle exec bin/postgresql_node

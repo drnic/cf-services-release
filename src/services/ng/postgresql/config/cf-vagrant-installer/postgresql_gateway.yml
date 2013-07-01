@@ -3,13 +3,13 @@ cloud_controller_uri: http://127.0.0.1:8181
 
 mbus: nats://localhost:4222
 service:
-  unique_id: postgresql92
+  unique_id: postgresql91
   name: postgresql
-  version: "9.2"
+  version: "9.1"
   description: 'PostgreSQL database'
   info_url: www.postgresql.org
   blurb: "Postgres, delicious postgresql."
-  provider_name: "Postgresql 9.2"
+  provider_name: "Postgresql 9.1"
   plans:
     free:
       name: Free
@@ -20,9 +20,10 @@ service:
   default_plan: free
   tags: ['relational']
   supported_versions:
-    - "9.2"
+    - "9.1"
   version_aliases:
-    current: free
+    current: "9.1"
+  default_version: "9.1"
 
 ip_route: localhost
 
