@@ -108,6 +108,6 @@ m_actions:
 db_connect_timeout: <%= plan_conf.db_connect_timeout || 3 %>
 db_query_timeout: <%= plan_conf.db_query_timeout || 10 %>
 db_use_async_query: <%= !plan_conf.db_use_async_query.nil? && plan_conf.db_use_async_query.to_s || "true" %>
-warden_socket_path: <%= node.warden_socket_path || "/tmp/warden.sock" %>
+warden_socket_path: /var/vcap/data/warden/warden.sock
 enable_xlog_enforcer: <%= !plan_conf.enable_xlog_enforcer.nil? && plan_conf.enable_xlog_enforcer.to_s || "true" %>
 xlog_enforce_tolerance: <%= plan_conf.xlog_enforce_tolerance || 5 %>

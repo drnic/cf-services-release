@@ -10,7 +10,7 @@ PKG_DIR=/var/vcap/packages/postgresql_node
 PG_DIR=/var/vcap/packages/postgresql
 
 SERVICE_NAME="postgresql"
-SOCKET_FILE=<%= node.warden_socket_path || "/tmp/warden.sock" %>
+SOCKET_FILE=/var/vcap/data/warden/warden.sock
 source $PKG_DIR/common/services/utils.sh
 
 case $1 in

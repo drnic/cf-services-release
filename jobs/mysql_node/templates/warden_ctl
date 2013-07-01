@@ -9,7 +9,7 @@ MYSQL_DIR=/var/vcap/packages/mysql
 MYSQL55_DIR=/var/vcap/packages/mysql55
 
 SERVICE_NAME="mysql"
-SOCKET_FILE=<%= node.warden_socket_path || "/tmp/warden.sock" %>
+SOCKET_FILE=/var/vcap/data/warden/warden.sock
 source /var/vcap/packages/mysql_node/common/services/utils.sh
 
 case $1 in
