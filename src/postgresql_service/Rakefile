@@ -33,6 +33,33 @@ namespace "bundler" do
   end
 end
 
+namespace "vagrant" do
+  desc "Setup /var/vcap paths"
+  task :vcap_paths do
+    %w[
+      /var/vcap
+      /var/vcap/store/postgresql_common/bin
+      /var/vcap/store/postgresql_common/config
+    ].each do |dir|
+      sh "sudo mkdir -p #{dir}"
+      sh "sudo chmod 775 #{dir}"
+      sh "sudo chgrp admin -R #{dir}"
+    end
+  end
+
+  desc "Copy common scripts into common warden folder"
+  task :warden_scripts do
+    templates_dir = File.expand_path("../../../jobs/postgresql_node/templates", __FILE__)
+    common_dir = "/var/vcap/store/postgresql_common/bin"
+    scripts = %w[warden_service_ctl pre_service_start.sh post_service_start.sh postgresql_ctl]
+    scripts.each do |script|
+      sh "sudo cp #{File.join(templates_dir, script)} #{common_dir}"
+    end
+  end
+  
+end
+task :vagrant => ["vagrant:vcap_paths", "vagrant:warden_scripts"]
+
 namespace "test" do
   def run_spec
     sh "nats-server &"
